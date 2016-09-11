@@ -28,6 +28,8 @@ use OCA\DAV\Connector\Sabre\FilesPlugin;
 use OCP\Files\StorageNotAvailableException;
 use Sabre\DAV\PropFind;
 use Sabre\DAV\PropPatch;
+use Sabre\HTTP\RequestInterface;
+use Sabre\HTTP\ResponseInterface;
 use Test\TestCase;
 
 /**
@@ -512,10 +514,10 @@ class FilesPluginTest extends TestCase {
 	 * @dataProvider downloadHeadersProvider
 	 */
 	public function testDownloadHeaders($isClumsyAgent, $contentDispositionHeader) {
-		$request = $this->getMockBuilder('Sabre\HTTP\RequestInterface')
+		$request = $this->getMockBuilder(RequestInterface::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$response = $this->getMockBuilder('Sabre\HTTP\ResponseInterface')
+		$response = $this->getMockBuilder(ResponseInterface::class)
 				->disableOriginalConstructor()
 				->getMock();
 
@@ -563,8 +565,8 @@ class FilesPluginTest extends TestCase {
 	 * @dataProvider postCreateFileProvider
 	 */
 	public function testPostWithAddMember($existingFile, $wantedName, $deduplicatedName, $expectedLocation) {
-		$request = $this->getMock('Sabre\HTTP\RequestInterface');
-		$response = $this->getMock('Sabre\HTTP\ResponseInterface');
+		$request = $this->createMock(RequestInterface::class);
+		$response = $this->createMock(ResponseInterface::class);
 
 		$request->expects($this->any())
 			->method('getUrl')
@@ -601,8 +603,8 @@ class FilesPluginTest extends TestCase {
 	}
 
 	public function testPostOnNonDirectory() {
-		$request = $this->getMock('Sabre\HTTP\RequestInterface');
-		$response = $this->getMock('Sabre\HTTP\ResponseInterface');
+		$request = $this->createMock(RequestInterface::class);
+		$response = $this->createMock(ResponseInterface::class);
 
 		$request->expects($this->any())
 			->method('getPath')
@@ -617,8 +619,8 @@ class FilesPluginTest extends TestCase {
 	 * @expectedException \Sabre\DAV\Exception\BadRequest
 	 */
 	public function testPostWithoutAddMember() {
-		$request = $this->getMock('Sabre\HTTP\RequestInterface');
-		$response = $this->getMock('Sabre\HTTP\ResponseInterface');
+		$request = $this->createMock(RequestInterface::class);
+		$response = $this->createMock(ResponseInterface::class);
 
 		$request->expects($this->any())
 			->method('getPath')

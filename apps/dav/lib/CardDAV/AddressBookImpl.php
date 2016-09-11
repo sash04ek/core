@@ -27,7 +27,6 @@ use OCP\Constants;
 use OCP\IAddressBook;
 use OCP\IURLGenerator;
 use Sabre\VObject\Component\VCard;
-use Sabre\VObject\Property\Text;
 use Sabre\VObject\Reader;
 use Sabre\VObject\UUIDUtil;
 
@@ -207,7 +206,7 @@ class AddressBookImpl implements IAddressBook {
 	 */
 	protected function createEmptyVCard($uid) {
 		$vCard = new VCard();
-		$vCard->add(new Text($vCard, 'UID', $uid));
+		$vCard->UID = $uid;
 		return $vCard;
 	}
 
