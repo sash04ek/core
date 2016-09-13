@@ -135,7 +135,8 @@ class Application extends App {
 					$c->query('Config'),
 					$c->query('ServerContainer')->getEventDispatcher(),
 					$c->query('Request')
-				)
+				),
+				$c->query('Logger')
 			);
 		});
 
