@@ -42,11 +42,13 @@ echo -en "--$boundrary\r\nContent-Type: application/json; charset=UTF-8\r\nConte
 cat $header >> $upload
 
 #CONTENTS
-echo -en "\r\n--$boundrary\r\nContent-ID: 1\r\nContent-length: $size1\r\nContent-MD5: $md51\r\n\r\n" >> $upload
-cat $testfile1 >> $upload
+echo -en "\r\n--$boundrary\r\nContent-ID: 1\r\nContent-length: 4\r\n\r\nabcd" >> $upload
 
 echo -en "\r\n--$boundrary\r\nContent-ID: 2\r\nContent-length: $size2\r\nContent-MD5: $md52\r\n\r\n" >> $upload
 cat $testfile2 >> $upload
+
+echo -en "\r\n--$boundrary\r\nContent-ID: 3\r\nContent-length: $size1\r\nContent-MD5: $md51\r\n\r\n" >> $upload
+cat $testfile1 >> $upload
 
 #END BOUNDRARY
 echo -en "\r\n--$boundrary--\r\n" >> $upload
